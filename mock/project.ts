@@ -3,7 +3,7 @@ import { MockMethod } from 'vite-plugin-mock';
 export default [
     {
         // 获取商品列表
-        url: '/mock/api/getProject',
+        url: '/mock/api/projects',
         method: 'get',
         response: () => {
             return {

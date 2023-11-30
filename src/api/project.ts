@@ -1,5 +1,5 @@
 import { get } from '@/http/request';
 
-export const getProject = async (data) => {
-    return get({}, '/getProject', data);
+export const getProjectList = async (data) => {
+    return get({}, '/projects', data);
 };

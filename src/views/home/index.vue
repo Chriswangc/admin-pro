@@ -11,7 +11,7 @@
                 <el-button type="primary" @click="onSearchGoods()">查询</el-button>
             </el-form-item>
         </el-form>
-        <el-table :data="computedDataList" border style="width: 100%">
+        <el-table :data="dataList" border style="width: 100%">
             <el-table-column prop="id" label="序号" width="180"></el-table-column>
             <el-table-column prop="title" label="名称" width="180"></el-table-column>
             <el-table-column prop="introduce" label="详情"></el-table-column>
@@ -22,7 +22,7 @@
             background
             layout="sizes, prev, pager, next"
             :total="searchData.dataCount"
-            :page-size="searchData.single_page_size"
+            :page-size="searchData.pageSize"
             :page-sizes="[5, 10, 15, 20]"
             @current-change="handleCurrentChange"
             @size-change="handleSizeChange"
@@ -32,15 +32,15 @@
 
 <script lang="ts" setup>
 import { reactive, onMounted, computed, ref, watch } from 'vue';
-import { getProject } from '@/api/project';
+import { getProjectList } from '@/api/project';
 // 项目接口
-export interface IProject {
+interface IProject {
     userId: number; // 项目
     id: number; // 项目id
     title: string; // 项目标题
     introduce: string; // 项目介绍
 }
-// 展示的商品数据 数组使用ref包裹定义
+// 项目list数据 数组使用ref包裹定义
 let projectList = ref<IProject[]>([]);
 
 let searchData = reactive({
@@ -48,9 +48,9 @@ let searchData = reactive({
     id: 0,
     title: '',
     introduce: '',
-    current_page: 1,
+    currentPage: 1,
     dataCount: 0,
-    single_page_size: 5
+    pageSize: 5
 });
 const data = reactive({}) as IProject[];
 // 查询商品列表
@@ -73,11 +73,11 @@ const onSearchGoods = () => {
         res = projectList.value;
     }
     projectList.value = res;
-    searchData.current_page = 1;
+    searchData.currentPage = 1;
     searchData.dataCount = projectList.value.length;
 };
 const fetchData = () => {
-    getProject().then((res) => {
+    getProjectList().then((res) => {
         projectList.value = res.data;
         searchData.dataCount = res.data.length;
     });
@@ -88,19 +88,19 @@ onMounted(() => {
     fetchData();
 });
 // 计算属性, 切割出实际上需要展示的数据
-let computedDataList = computed(() => {
+let dataList = computed(() => {
     return projectList.value.slice(
-        (searchData.current_page - 1) * searchData.single_page_size,
-        searchData.current_page * searchData.single_page_size
+        (searchData.currentPage - 1) * searchData.pageSize,
+        searchData.currentPage * searchData.pageSize
     );
 });
 // 改变当前页码
 const handleCurrentChange = (page: number) => {
-    searchData.current_page = page;
+    searchData.currentPage = page;
 };
 // 改变每页显示多少条数据
-const handleSizeChange = (page_size: number) => {
-    searchData.single_page_size = page_size;
+const handleSizeChange = (pageSize: number) => {
+    searchData.pageSize = pageSize;
 };
 // 解决搜索的问题
 watch([() => searchData.title, () => searchData.introduce], () => {
@@ -113,59 +113,13 @@ watch([() => searchData.title, () => searchData.introduce], () => {
 <style lang="less" scoped>
 .wrap-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
     height: max-content;
     flex-direction: column;
 
-    .title {
-        font-size: 60px;
-        font-weight: 700;
-        color: transparent;
-        -webkit-background-clip: text;
-        background-clip: text;
-        background-image: linear-gradient(to right, #409eff, #ffc76b);
-    }
-
-    .subtitle {
-        font-size: 40px;
-        font-weight: 500;
-        color: #213547;
-    }
-
-    .content {
-        margin: 20px 0;
-        font-size: 16px;
-        color: #767676;
-    }
-
-    .op-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 5px 0;
-
-        > :last-child {
-            background-color: #f1f1f1;
-        }
-    }
-
-    .shields-icon {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    .search-form {
-        padding: 10px;
-    }
-
     .pagination {
         display: flex;
-        justify-content: right;
-        align-items: right;
+        // justify-content: right;
+        // align-items: right;
         margin: 10px;
     }
 }

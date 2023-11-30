@@ -12,8 +12,7 @@ export default {
             component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
             meta: {
                 isShow: true,
-                title: '项目介绍',
-                role: ['common', 'admin']
+                title: '项目介绍'
             }
         },
         {
@@ -21,7 +20,7 @@ export default {
             name: 'UserPage',
             component: import(/* webpackChunkName: "user" */ '@/views/user/index.vue'),
             meta: {
-                title: '用户列表',
+                title: '用户模块',
                 isShow: true
             }
         },
@@ -30,7 +29,7 @@ export default {
             name: 'RolePage',
             component: import(/* webpackChunkName: "role" */ '@/views/role/index.vue'),
             meta: {
-                title: '角色列表',
+                title: '角色模块',
                 isShow: true
             }
         },
@@ -39,7 +38,7 @@ export default {
             name: 'AuthPage',
             component: import(/* webpackChunkName: "auth" */ '@/views/auth/index.vue'),
             meta: {
-                title: '权限列表',
+                title: '权限模块',
                 isShow: true
             }
         }

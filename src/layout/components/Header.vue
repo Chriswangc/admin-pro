@@ -10,9 +10,9 @@
     <el-drawer v-model="showSetting" :show-close="false" :with-header="false" size="300">
         <div class="setting-header">
             <h2>项目配置</h2>
-            <i-ep-close class="closeButton" @click="closeSetting"></i-ep-close>
+            <i-ep-close @click="closeSetting"></i-ep-close>
         </div>
-        <div>
+        <div class="out">
             <el-button type="primary" @click="logout">退出</el-button>
         </div>
     </el-drawer>
@@ -60,22 +60,6 @@ const logout = function () {
     }
 }
 
-.username {
-    color: brown;
-    cursor: default;
-    opacity: 1;
-}
-
-.menu-button {
-    display: flex;
-    align-items: center;
-    margin: 0 5px;
-    font-size: var(--el-menu-item-font-size);
-    color: brown;
-    opacity: 1;
-    cursor: pointer;
-}
-
 .setting {
     cursor: pointer;
 }
@@ -86,9 +70,11 @@ const logout = function () {
     align-items: center;
     height: 50px;
     color: var(--dawei-color-dark-black);
+}
 
-    .closeButton {
-        cursor: pointer;
-    }
+.out {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
