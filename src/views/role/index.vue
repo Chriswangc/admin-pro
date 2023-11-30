@@ -10,7 +10,7 @@
             <el-table-column prop="roleName" label="角色名称" width="180px"></el-table-column>
             <el-table-column label="操作">
                 <template #default="scope">
-                    <el-button type="primary" size="mini" @click="onChangeRole(scope.row)">修改权限</el-button>
+                    <el-button type="primary" size="mini" @click="onChangeAuth(scope.row)">修改权限</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -18,8 +18,10 @@
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { ElMessageBox, ElMessage } from 'element-plus';
 import { getRoleList } from '@/api/role';
+const router = useRouter();
 interface IRole {
     role: number; // 角色id
     roleName: string; // 角色名称
@@ -57,5 +59,14 @@ const onAddRole = () => {
                 message: `点击了取消按钮`
             });
         });
+};
+const onChangeAuth = (row: IRole) => {
+    router.push({
+        path: 'auth',
+        query: {
+            id: row.roleId,
+            auth: row.authority
+        }
+    });
 };
 </script>
