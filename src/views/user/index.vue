@@ -67,7 +67,8 @@
 <script lang="ts" setup>
 import { reactive, ref, onMounted, watch } from 'vue';
 import { useUserStore } from '@/store/user';
-import { getRoleList, getUserList } from '@/api/role';
+import { getUserList } from '@/api/user';
+import { getRoleList } from '@/api/role';
 const userStore = useUserStore();
 // 角色接口
 export interface IRole {

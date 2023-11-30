@@ -24,11 +24,6 @@ export const useUserStoreHook = defineStore('userInfo', {
                 return res;
             });
         },
-        logout() {
-            sessionStorage.removeItem('userInfo');
-            this.accessToken = '';
-            router.push('/login');
-        },
         stroeRefreshUserInfo() {
             if (this.username == '大伟' && this.accessToken != '') {
                 refreshUserInfo({
