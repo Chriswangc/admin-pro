@@ -1,5 +1,3 @@
-import { post, get } from '@/http/request';
-
 export type LoginRequest = {
     username: string;
     password: string;
@@ -14,15 +12,33 @@ export type LoginResponse = {
     roles: string[];
     accessToken: string;
 };
-// 定义的接口
-export const userLogin = async (data?: LoginRequest) => {
-    return post<LoginResponse>({}, '/login', data);
-};
+// // 定义的接口
+// export const userLogin = async (data?: LoginRequest) => {
+//     return post<LoginResponse>({}, '/login', data);
+// };
 
-export const refreshUserInfo = async (data?: reLoginRequest) => {
-    return post<LoginResponse>({}, '/getUserInfo', data);
-};
-// 获取所有的用户
-export const getUserList = () => {
-    return get({}, '/getUserList');
-};
+// export const refreshUserInfo = async (data?: reLoginRequest) => {
+//     return post<LoginResponse>({}, '/getUserInfo', data);
+// };
+// // 获取所有的用户
+// export const getUserList = () => {
+//     return get({}, '/getUserList');
+// };
+import service from '@/http/request';
+
+export function userLogin(data: LoginRequest) {
+    return service({
+        url: '/login',
+        method: 'POST',
+        data
+    });
+}
+
+//  获取所有的用户
+export function getUserList(data) {
+    return service({
+        url: '/getUserList',
+        method: 'get',
+        data
+    });
+}

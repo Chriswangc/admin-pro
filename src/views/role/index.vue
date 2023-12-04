@@ -10,7 +10,7 @@
             <el-table-column prop="roleName" label="角色名称" width="180px"></el-table-column>
             <el-table-column label="操作">
                 <template #default="scope">
-                    <el-button type="primary" size="mini" @click="onChangeAuth(scope.row)">修改权限</el-button>
+                    <el-button type="primary" size="small" @click="onChangeAuth(scope.row)">修改权限</el-button>
                 </template>
             </el-table-column>
         </el-table>
