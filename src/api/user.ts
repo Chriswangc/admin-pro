@@ -9,6 +9,7 @@ export type reLoginRequest = {
     accessToken: string;
 };
 export type LoginResponse = {
+    data: any;
     username: string;
     roles: string[];
     accessToken: string;
@@ -21,7 +22,7 @@ export const userLogin = async (data?: LoginRequest) => {
 export const refreshUserInfo = async (data?: reLoginRequest) => {
     return post<LoginResponse>({}, '/getUserInfo', data);
 };
-
-export const getUserList = async (data) => {
-    return get({}, '/getUserList', data);
+// 获取所有的用户
+export const getUserList = () => {
+    return get({}, '/getUserList');
 };
