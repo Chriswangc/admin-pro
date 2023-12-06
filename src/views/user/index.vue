@@ -126,7 +126,6 @@ const handleEditUser = (row: IUser) => {
         ...row,
         role: row.role.map((value) => value.role)
     });
-    // console.log(editUser);
     // 按照下面这样定义就使用响应式了
     // editUser = {
     //     id: row.id,
@@ -137,7 +136,6 @@ const handleEditUser = (row: IUser) => {
     // };
 };
 const ensureEditUser = () => {
-    console.log(editUser);
     editShow.value = false;
     // 取出来修改的对象
     let obj: IUser = userList.value.find((item) => item.id === editUser.id);
@@ -145,7 +143,6 @@ const ensureEditUser = () => {
     obj.nickName = editUser.nickName;
     //  obj.role.splice(0, obj.role.length)  // 清除角色
     obj.role = []; // 清除角色
-    console.log(obj);
     roleWithAuthList.value.forEach((element) => {
         if (editUser.role.find((value) => value === element.roleId)) {
             obj.role.push({

@@ -27,13 +27,12 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import { User, Lock } from '@element-plus/icons-vue';
+import { User, Lock, Home } from '@element-plus/icons-vue';
 import { useUserStore } from '@/store/user';
 const userStore = useUserStore();
 const router = useRouter();
-console.log(userStore);
 const userInfo = reactive({
     username: 'admin',
     password: 'admin'

@@ -35,9 +35,6 @@ onMounted(() => {
         .catch((err) => {});
 });
 const onChangeAuth = () => {
-    console.log(treeRef.value);
     const selectedTreeNode = treeRef.value.getCheckedNodes();
-    console.log(selectedTreeNode);
-    console.log(treeRef.value.getCheckedKeys());
 };
 </script>

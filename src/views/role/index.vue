@@ -33,7 +33,7 @@ onMounted(() => {
         .catch((err) => {});
 });
 const onAddRole = () => {
-    ElMessageBox.prompt('请输入角色名称', '添加角色', {
+    ElMessageBox.prompt('请输入角色名称!', '添加角色', {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
     })

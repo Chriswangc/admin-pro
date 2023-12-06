@@ -1,5 +1,7 @@
 import { defineConfig, loadEnv } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
+import externalGlobals from 'rollup-plugin-external-globals';
+import { visualizer } from 'rollup-plugin-visualizer';
 import type { UserConfig, ConfigEnv } from 'vite';
 import { fileURLToPath } from 'url';
 import AutoImport from 'unplugin-auto-import/vite';
@@ -10,12 +12,18 @@ import ElementPlus from 'unplugin-element-plus/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+const globals = externalGlobals({
+    moment: 'moment',
+    'video.js': 'videojs',
+    jspdf: 'jspdf',
+    xlsx: 'XLSX',
+    echart: 'echart'
+});
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     // 获取当前工作目录
     const root = process.cwd();
     // 获取环境变量
     const env = loadEnv(mode, root);
-    console.log(env);
     return {
         // 项目根目录
         root,
@@ -95,18 +103,38 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
             // 打包大小超出 400kb 提示警告
             chunkSizeWarningLimit: 400,
             rollupOptions: {
+                // output: { experimentalMinChunkSize: 10240 },
                 // 打包入口文件 根目录下的 index.html
                 // 也就是项目从哪个文件开始打包
                 input: {
                     index: fileURLToPath(new URL('./index.html', import.meta.url))
                 },
-                // 静态资源分类打包
+                external: ['moment', 'video.js', 'jspdf', 'xlsx', 'echart'],
+                plugins: [visualizer({ open: true }), globals],
                 output: {
-                    format: 'esm',
-                    chunkFileNames: 'static/js/[name]-[hash].js',
-                    entryFileNames: 'static/js/[name]-[hash].js',
-                    assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+                    // treeshake: {
+                    //     preset: 'recommended',
+                    //     manualPureFunctions: ['console.log']
+                    // }
+                    manualChunks: (id: string) => {
+                        // html2canvas 只有极少数的页面使用了 所以要单独处理一下 第三方库分类打包
+                        if (id.includes('html2canvas')) {
+                            return 'html2canvas';
+                        }
+                        if (id.includes('node_modules')) {
+                            return 'vendor';
+                        }
+                        return 'index';
+                    }
                 }
+
+                // 静态资源分类打包
+                // output: {
+                //     format: 'esm',
+                //     chunkFileNames: 'static/js/[name]-[hash].js',
+                //     entryFileNames: 'static/js/[name]-[hash].js',
+                //     assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+                // }
             }
         },
         // 配置别名

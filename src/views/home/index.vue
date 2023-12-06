@@ -55,7 +55,6 @@ let searchData = reactive({
 const data = reactive({}) as IProject[];
 // 查询商品列表
 const onSearchGoods = () => {
-    console.log(projectList.value);
     let res: IProject[] = [];
     if (searchData.title || searchData.introduce) {
         if (searchData.title) {
@@ -69,7 +68,6 @@ const onSearchGoods = () => {
             });
         }
     } else {
-        console.log(projectList.value);
         res = projectList.value;
     }
     projectList.value = res;
