@@ -18,7 +18,7 @@ export default {
         {
             path: '/user',
             name: 'UserPage',
-            component: () => import(/* webpackChunkName: "home" */ '@/views/user/index.vue'),
+            component: () => import(/* webpackChunkName: "user" */ '@/views/user/index.vue'),
             meta: {
                 title: '用户模块',
                 isShow: true

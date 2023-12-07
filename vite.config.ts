@@ -108,7 +108,8 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
                 input: {
                     index: fileURLToPath(new URL('./index.html', import.meta.url))
                 },
-                plugins: [visualizer({ open: true })],
+                external: ['moment', 'video.js', 'jspdf', 'xlsx', 'echart'],
+                plugins: [visualizer({ open: true }), globals],
                 experimentalLogSideEffects: true,
                 treeshake: {
                     preset: 'recommended'
@@ -120,7 +121,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
                         if (id.includes('node_modules')) {
                             return 'vendor';
                         }
-                        // return 'index';
+                        return 'index';
                     }
                 }
 
