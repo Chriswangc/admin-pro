@@ -12,6 +12,10 @@ import ElementPlus from 'unplugin-element-plus/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import ViteCompression from 'vite-plugin-compression';
+import brotli from 'rollup-plugin-brotli';
+import { createHtmlPlugin } from 'vite-plugin-html';
+
 const globals = externalGlobals({
     moment: 'moment',
     'video.js': 'videojs',
@@ -32,6 +36,26 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         publicDir: fileURLToPath(new URL('./public', import.meta.url)), // 无需处理的静态资源位置
         assetsInclude: fileURLToPath(new URL('./src/assets', import.meta.url)), // 需要处理的静态资源位置
         plugins: [
+            createHtmlPlugin({
+                inject: {
+                    data: {
+                        monentscript:
+                            '<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment.js"></script>',
+                        videoscript:
+                            '<script src="https://cdn.jsdelivr.net/npm/video.js@7.14.3/dist/video.min.js"></script>',
+                        echartscript: '<script src="https://cdn.jsdelivr.net/npm/echarts@5.2.1/echarts"></script>',
+                        jspdfscript: '<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/pdf.js"></script>',
+                        xlsxscript:
+                            '<script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.4/dist/xlsx.full.min.js"></script>'
+                    }
+                }
+            }),
+            // brotli({}),
+            // ViteCompression({
+            //     threshold: 1024 * 20, // 超过20kb才进行压缩
+            //     ext: '.gz', // 压缩后缀
+            //     algorithm: 'gzip' // 压缩算法
+            // }),
             // Vue模板文件编译插件
             vue(),
             // jsx文件编译插件
@@ -118,11 +142,17 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
                 output: {
                     experimentalMinChunkSize: 20 * 1024,
                     manualChunks: (id: string) => {
+                        if (id.includes('html-canvans')) {
+                            return 'html-canvans';
+                        }
                         if (id.includes('node_modules')) {
                             return 'vendor';
                         }
-                        return 'index';
-                    }
+                        // return 'index';
+                    },
+                    chunkFileNames: 'static/js/[name]-[hash].js', // 代码分割后文件名
+                    entryFileNames: 'static/js/[name]-[hash:6].js', // 入口文件名
+                    assetFileNames: 'static/[ext]/[name]-[hash].[ext]' // 静态资源文件名
                 }
 
                 // 静态资源分类打包
