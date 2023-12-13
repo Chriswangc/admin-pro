@@ -1,15 +1,15 @@
 <template>
     <div class="wrap-about">
-        <ElForm ref="formRef"></ElForm>
+        <tag :text="text" :theme="theme"></tag>
+        <tag :text="text" :theme="theme"></tag>
+        <tag :text="text" :theme="theme"></tag>
     </div>
 </template>
 <script setup lang="ts">
-// import { ref } from 'vue';
-import { useCompRef } from '@/hooks/useCompRef';
-import { ElForm } from 'element-plus';
-const formRef = useCompRef<typeof ElForm>();
-
-// formRef.value?.validate
+import { ref } from 'vue';
+// import tag from './tag.vue';
+const text = ref('大伟');
+const theme = ref('black');
 </script>
 <style lang="less" scoped>
 .wrap-about {

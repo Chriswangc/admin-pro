@@ -42,7 +42,7 @@ module.exports = {
         'vue/multi-word-component-names': [
             'error',
             {
-                ignores: ['index', 'Header'] //需要忽略的组件名
+                ignores: ['index', 'Header', 'tag', 'Tag'] //需要忽略的组件名
             }
         ],
         '@typescript-eslint/no-var-requires': 'off',
