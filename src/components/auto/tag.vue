@@ -25,7 +25,7 @@ const setText = () => {
     tag.value!.innerHTML = props.text;
 };
 const setTheme = () => {
-    tag.value!.style.backgroundColor = props.text;
+    tag.value!.style.backgroundColor = props.theme;
 };
 </script>
 <style lang="less" scoped>
