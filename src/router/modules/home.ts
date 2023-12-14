@@ -3,7 +3,8 @@ export default {
     name: 'Home',
     component: () => import(/* webpackChunkName: "home" */ '@/layout/index.vue'),
     meta: {
-        role: ['common', 'admin']
+        role: ['common', 'admin'],
+        parentRouter: 'Home'
     },
     children: [
         {
@@ -12,8 +13,10 @@ export default {
             component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
             meta: {
                 isShow: true,
-                title: '项目介绍'
-            }
+                title: '项目介绍',
+                parentRouter: 'Home'
+            },
+            children: []
         },
         {
             path: '/user',
