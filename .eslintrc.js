@@ -54,6 +54,7 @@ module.exports = {
         'vue/no-template-shadow': 'off',
         'vue/require-v-for-key': 'off',
         'vue/no-textarea-mustache': 'off',
-        'vue/no-v-html': 'off'
+        'vue/no-v-html': 'off',
+        'no-constant-condition': 'off'
     }
 };
