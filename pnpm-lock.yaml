@@ -54,6 +54,7 @@ specifiers:
   vite-plugin-compression: ^0.5.1
   vite-plugin-html: ^3.2.0
   vite-plugin-mock: ^3.0.0
+  vite-plugin-webpackchunkname: ^0.2.4
   vitest: ^0.34.6
   vue: ^3.3.8
   vue-router: ^4.2.5
@@ -119,6 +120,7 @@ devDependencies:
   vite-plugin-compression: 0.5.1_vite@5.0.5
   vite-plugin-html: 3.2.0_vite@5.0.5
   vite-plugin-mock: 3.0.0_cdz3jcmarl7r2oreywx2lsl44y
+  vite-plugin-webpackchunkname: 0.2.4_vite@5.0.5
   vitest: 0.34.6_less@4.2.0
   vue-tsc: 1.8.22_typescript@5.2.2
 
@@ -1030,6 +1032,15 @@ packages:
       open: 9.1.0
       picocolors: 1.0.0
       tslib: 2.6.2
+    dev: true
+
+  /@rollup/plugin-alias/3.1.9:
+    resolution: {integrity: sha512-QI5fsEvm9bDzt32k39wpOwZhVzRcL5ydcffUHMyLVaVaLeC70I8TJZ17F1z1eMoLu4E/UOcH9BWVkKpIKdrfiw==}
+    engines: {node: '>=8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      slash: 3.0.0
     dev: true
 
   /@rollup/pluginutils/4.2.1:
@@ -2590,6 +2601,10 @@ packages:
       is-arrayish: 0.2.1
     dev: true
 
+  /es-module-lexer/0.10.5:
+    resolution: {integrity: sha512-+7IwY/kiGAacQfY+YBhKMvEmyAJnw5grTUgjG85Pe7vcUI/6b7pZjZG8nQ7+48YhzEAEqrEgD2dCz/JIK+AYvw==}
+    dev: true
+
   /es-module-lexer/1.4.1:
     resolution: {integrity: sha512-cXLGjP0c4T3flZJKQSuziYoq7MlT+rnvfZjfp7h+I7K9BNX54kP9nyWvdbwjQ4u1iWbOL4u96fgeZLToQlZC7w==}
     dev: true
@@ -3857,6 +3872,13 @@ packages:
       yallist: 4.0.0
     dev: true
 
+  /magic-string/0.26.7:
+    resolution: {integrity: sha512-hX9XH3ziStPoPhJxLq1syWuZMxbDvGNbVchfrdCtanC7D13888bMFow61x8axrx+GfHLtVeAx2kxL7tTGRl+Ow==}
+    engines: {node: '>=12'}
+    dependencies:
+      sourcemap-codec: 1.4.8
+    dev: true
+
   /magic-string/0.30.5:
     resolution: {integrity: sha512-7xlpfBaQaP/T6Vh8MO/EqXSW5En6INHEvEXQiuff7Gku0PWjU3uf6w/j9o7O+SpB5fOAkrI5HeoNgwjEO0pFsA==}
     engines: {node: '>=12'}
@@ -4873,6 +4895,11 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
+  /sourcemap-codec/1.4.8:
+    resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+    deprecated: Please use @jridgewell/sourcemap-codec instead
+    dev: true
+
   /spdx-correct/3.2.0:
     resolution: {integrity: sha512-kN9dJbvnySHULIluDHy32WHRUu3Og7B9sbY7tsFLctQkIqnMh3hErYgdMjTYuqmcXX+lK5T1lnUt3G7zNswmZA==}
     dependencies:
@@ -5661,6 +5688,19 @@ packages:
     transitivePeerDependencies:
       - esbuild
       - supports-color
+    dev: true
+
+  /vite-plugin-webpackchunkname/0.2.4_vite@5.0.5:
+    resolution: {integrity: sha512-aVvS+cR1PjlDG4vsyks9Uzh99W+qBdKmVa+Lb8M7VHGXf57BFkvl0y1JJxb3sGm6ilx8wqGippgKEGbUORvJiA==}
+    peerDependencies:
+      rollup: ^2.67.2
+      vite: '*'
+    dependencies:
+      '@rollup/plugin-alias': 3.1.9
+      '@rollup/pluginutils': 4.2.1
+      es-module-lexer: 0.10.5
+      magic-string: 0.26.7
+      vite: 5.0.5_selparimxigoaw5na2h5n2nbie
     dev: true
 
   /vite/5.0.5_selparimxigoaw5na2h5n2nbie:
