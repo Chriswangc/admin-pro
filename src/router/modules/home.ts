@@ -1,44 +1,36 @@
 export default {
     path: '/',
     name: 'Home',
+    redirect: '/home',
     component: () => import(/* webpackChunkName: "home" */ '@/layout/index.vue'),
     meta: {
         role: ['common', 'admin']
     },
     children: [
         {
-            path: '/',
+            path: '/home',
             name: 'HomePage',
             component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
             meta: {
                 isShow: true,
-                title: '项目介绍'
+                title: '首页'
             }
         },
         {
-            path: '/user',
-            name: 'UserPage',
-            component: () => import(/* webpackChunkName: "user" */ '@/views/user/index.vue'),
+            path: '/search',
+            name: 'SearchPage',
+            component: () => import(/* webpackChunkName: "search" */ '@/views/search/index.vue'),
             meta: {
-                title: '用户模块',
+                title: '搜索模块',
                 isShow: true
             }
         },
         {
-            path: '/role',
-            name: 'RolePage',
-            component: () => import(/* webpackChunkName: "role" */ '@/views/role/index.vue'),
+            path: '/setting',
+            name: 'SettingPage',
+            component: () => import(/* webpackChunkName: "setting" */ '@/views/setting/index.vue'),
             meta: {
-                title: '角色模块',
-                isShow: true
-            }
-        },
-        {
-            path: '/auth',
-            name: 'AuthPage',
-            component: () => import(/* webpackChunkName: "auth" */ '@/views/auth/index.vue'),
-            meta: {
-                title: '权限模块',
+                title: '设置模块',
                 isShow: true
             }
         }
