@@ -14,6 +14,6 @@ const onAddCount = () => {
 </script>
 <style lang="less" scoped>
 .ignore-wrap {
-    padding: 10px;
+    padding: 10rem;
 }
 </style>
